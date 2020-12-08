@@ -9,12 +9,14 @@ const register = require ('./controllers/register');
 const signin = require ('./controllers/signin');
 const profile = require ('./controllers/profile');
 const image = require ('./controllers/image');
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0; 
 
 const db = knex({
   client: 'pg',
   connection: {
-    connectionString: : process.env.DATABASE_URL,
-  	ssl: true,
+ onnectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
   }
 });
 
@@ -45,7 +47,3 @@ app.listen(process.env.PORT || 3000, () => {
 
 
 
-// response 
-// sign in --> post == sucess/fail
-// register --> Post = user object
-// profile/:userId --.=> GET == userinfo
